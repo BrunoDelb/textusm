@@ -125,7 +125,10 @@ if (output && !/\.(?:svg|png|pdf|html)$/.test(output)) {
 }
 
 (async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const configJson = readConfigFile(configFile);
   configJson.text = fs.readFileSync(input, "utf-8");
 
